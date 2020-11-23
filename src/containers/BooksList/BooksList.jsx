@@ -1,21 +1,9 @@
 import BookCard from "../../components/BookCard/BookCard";
+import { connect } from "react-redux";
 
-const BooksList = ({}) => {
-  const books = [
-    {
-      id: 1,
-      volumeInfo: {
-        title: "Flowers",
-        imageLinks: {
-          small:
-            "http://books.google.com/books/content?id=aIUMBAAAQBAJ&printsec=frontcover&img=1&zoom=2&edge=curl&imgtk=AFLRE738ndXQJC_c3pP2j-u8ZibJaDZx3S2HDXXQTIUwmSGEy5tDUDxZX0ivBhlrdmjLnzNQOyGE0RHTUb5x5S3hYFhUHbZZ_yLIe9EeMeUVu4PxzDCkdxBgDJSuJbWjqDBw5XdRqvrP&source=gbs_api",
-        },
-      },
-    },
-  ];
-
+const BooksList = ({ books }) => {
   return (
-    <div className="d-flex justify-content-center">
+    <div className="d-flex flex-wrap justify-content-center">
       {books && books.length > 0 ? (
         books.map((book) => <BookCard key={book.id} book={book.volumeInfo} />)
       ) : (
@@ -25,4 +13,8 @@ const BooksList = ({}) => {
   );
 };
 
-export default BooksList;
+const mapStateToProps = (state) => ({
+  books: state.books,
+});
+
+export default connect(mapStateToProps)(BooksList);

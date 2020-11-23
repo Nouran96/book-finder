@@ -1,9 +1,17 @@
-.book-thumbnail {
-  max-height: 250px;
+.book-card {
+  width: var(--card-width);
   border-radius: 8px;
-}
 
-.book-title {
-  font-weight: bold;
-  font-size: 1.2em;
+  .book-thumbnail {
+    height: var(--card-image-height);
+  }
+
+  .image-fallback {
+    height: var(--card-image-height);
+  }
+
+  .book-title {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
 }

@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createFetchBooksAction } from "../../store/actions/books";
 import { connect } from "react-redux";
 
-const Search = ({ onFetchingBooks }) => {
+const Search = ({ onFetchingBooks, onEmptyingBooks }) => {
   const [query, setQuery] = useState("");
 
   const handleChange = (e) => {
     setQuery(e.target.value);
-
-    const query = e.target.value.split(" ").join("+");
-    onFetchingBooks(query);
   };
+
+  useEffect(() => {
+    const urlQuery = query.split(" ").join("+");
+    onFetchingBooks(urlQuery);
+  }, [query]);
 
   return (
     <div className="form-group py-2 d-flex justify-content-center">
