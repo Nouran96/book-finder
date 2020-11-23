@@ -1,9 +1,16 @@
 import { useState } from "react";
+import { createFetchBooksAction } from "../../store/actions/books";
+import { connect } from "react-redux";
 
-const Search = () => {
+const Search = ({ onFetchingBooks }) => {
   const [query, setQuery] = useState("");
 
-  const handleChange = (e) => setQuery(e.target.value.trim());
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+
+    const query = e.target.value.split(" ").join("+");
+    onFetchingBooks(query);
+  };
 
   return (
     <div className="form-group py-2 d-flex justify-content-center">
@@ -18,4 +25,8 @@ const Search = () => {
   );
 };
 
-export default Search;
+const mapDispatchToProps = (dispatch) => ({
+  onFetchingBooks: (query) => dispatch(createFetchBooksAction(query)),
+});
+
+export default connect(null, mapDispatchToProps)(Search);
