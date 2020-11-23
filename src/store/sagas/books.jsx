@@ -1,6 +1,9 @@
 import { call, put } from "redux-saga/effects";
 import { fetchBooks } from "../endpoints/books";
-import { createAddBooksAction } from "../actions/books";
+import {
+  createAddBooksAction,
+  createBooksFetchErrorAction,
+} from "../actions/books";
 
 export function* handleBooksFetch(action) {
   try {
@@ -8,6 +11,6 @@ export function* handleBooksFetch(action) {
 
     yield put(createAddBooksAction(books));
   } catch (error) {
-    console.log(error);
+    yield put(createBooksFetchErrorAction(error));
   }
 }

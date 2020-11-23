@@ -1,6 +1,6 @@
 import axiosInstance from "axios";
 
-axiosInstance.interceptors.requests.use(
+axiosInstance.interceptors.request.use(
   (config) => console.log(config),
   (error) => console.log(error)
 );
